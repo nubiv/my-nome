@@ -1,0 +1,15 @@
+Host *.github.com
+    AddKeysToAgent yes
+    IdentityFile ~/.ssh/nubiv
+
+Host apricot-ali
+    HostName 47.116.216.119
+    User root
+    IdentityFile ~/.ssh/nubiv
+    Port 23456
+
+Host jw-ofc
+    HostName 192.168.1.17
+    User jw
+    IdentityFile ~/.ssh/nubiv
+    Port 22
