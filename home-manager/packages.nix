@@ -56,13 +56,14 @@ let
     nixpkgs-fmt
   ];
 
-  pythonTools = with pkgs; [ ];
+  pythonTools = with pkgs; [ rye ];
 
   rustTools = with pkgs; [
     rustc
+    rustfmt
+    clippy
     cargo
     rust-analyzer
-    rye
   ];
 
   scripts = with pkgs; [
