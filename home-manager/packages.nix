@@ -59,6 +59,7 @@ let
   pythonTools = with pkgs; [ ];
 
   rustTools = with pkgs; [
+    rustc
     cargo
     rust-analyzer
     rye
