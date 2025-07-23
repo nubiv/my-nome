@@ -64,6 +64,7 @@ let
     clippy
     cargo
     rust-analyzer
+    just
   ];
 
   scripts = with pkgs; [
