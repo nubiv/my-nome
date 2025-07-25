@@ -59,11 +59,12 @@ let
   pythonTools = with pkgs; [ rye ];
 
   rustTools = with pkgs; [
-    rustc
-    rustfmt
-    clippy
-    cargo
-    rust-analyzer
+    rustup
+    #rustc
+    #rustfmt
+    #clippy
+    #cargo
+    #rust-analyzer
     just
   ];
 
