@@ -56,16 +56,20 @@ let
     nixpkgs-fmt
   ];
 
-  pythonTools = with pkgs; [ rye ];
+  pythonTools = with pkgs; [ 
+    rye 
+    uv
+    maturin
+  ];
 
   rustTools = with pkgs; [
     rustup
+    just
     #rustc
     #rustfmt
     #clippy
     #cargo
     #rust-analyzer
-    just
   ];
 
   scripts = with pkgs; [
