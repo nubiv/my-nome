@@ -15,6 +15,8 @@ let
 
   buildTools = with pkgs; [
     cmake
+    meson
+    ninja 
   ];
 
   databaseTools = with pkgs; [ ];
