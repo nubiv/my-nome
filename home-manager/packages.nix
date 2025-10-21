@@ -17,6 +17,7 @@ let
     cmake
     meson
     ninja 
+    #llvm
   ];
 
   databaseTools = with pkgs; [ ];
@@ -74,6 +75,11 @@ let
     #rust-analyzer
   ];
 
+  cTools = with pkgs; [
+    #llvmPackages.clang-tools
+    #llvmPackages.clangd
+  ];
+
   scripts = with pkgs; [
     (writeScriptBin "pk" ''
       if [ $# -eq 0 ]; then
@@ -99,6 +105,7 @@ basic
 ++ nixTools
 ++ pythonTools
 ++ rustTools
+++ cTools
 ++ scripts
 ++ security
 ++ versionControlTools
