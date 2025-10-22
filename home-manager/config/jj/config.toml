@@ -1,9 +1,10 @@
 "$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
 
 [aliases]
+b = ["bookmark"]
 bcr = ["bookmark", "create", "--revision"]
 bl = ["bookmark", "list"]
-d = ["diff"]
+df = ["diff"]
 hop = [
   "bookmark",
   "move",
@@ -14,7 +15,12 @@ hop = [
 ]
 l = ["log"]
 n = ["new"]
+d = ["describe"]
+ab = ["abandon"]
+e = ["edit"]
 ol = ["op", "log"]
+fetch = ["git", "fetch"]
+push = ["git", "push"]
 
 [git]
 sign-on-push = true
@@ -36,5 +42,5 @@ log-synthetic-elided-nodes = true
 pager = "less -FRX"
 
 [user]
-name = "qt"
-email = "qt@outlook.com"
+name = "nubiv"
+email = "h.horace0921@gmail.com"
