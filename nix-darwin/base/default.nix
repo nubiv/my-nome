@@ -4,9 +4,11 @@
 }:
 
 {
+  # Disable system-config for fast deploy, mostly used for new machine initial setup
   # system-config = { pkgs, ...}: import ./system.nix {
   #	inherit pkgs;
   #	};
+
   documentation.enable = true;
 
   fonts.packages = pkgs.fonts.packages;
@@ -33,8 +35,8 @@
     ssh = {
       knownHosts = {
         # nixbuild = {
-        #   hostNames = [ "eu.nixbuild.net" ];
-        #   publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIQCZc54poJ8vqawd8TraNryQeJnvH1eLpIDgbiqymM";
+        #   hostNames = [ "xxxx" ];
+        #   publicKey = "ssh-ed25519 xxxxxx";
         # };
       };
     };
