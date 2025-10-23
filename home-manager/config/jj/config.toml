@@ -14,6 +14,7 @@ hop = [
   "closest_pushable(@)",
 ]
 l = ["log"]
+la = ["log", "-r", "'all()'"]
 n = ["new"]
 d = ["describe"]
 ab = ["abandon"]
