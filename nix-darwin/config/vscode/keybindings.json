@@ -1,0 +1,43 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+    "key": "cmd+n",
+    "command": "explorer.newFile",
+    "when": "explorerViewletFocus"
+  },
+  {
+    "key": "cmd+shift+n",
+    "command": "explorer.newFolder",
+    "when": "explorerViewletFocus"
+  },
+  {
+    "key": "cmd+c",
+    "command": "filesExplorer.copy",
+    "when": "explorerViewletFocus"
+  },
+  {
+    "key": "cmd+p",
+    "command": "filesExplorer.paste",
+    "when": "explorerViewletFocus"
+  },
+  {
+    "key": "cmd+x",
+    "command": "filesExplorer.cut",
+    "when": "explorerViewletFocus"
+  },
+  {
+    "key": "cmd+d",
+    "command": "deleteFile",
+    "when": "explorerViewletFocus"
+  },
+  {
+    "key": "cmd+o",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "explorerViewletFocus"
+  },
+  {
+    "key": "cmd+h",
+    "command": "editor.action.inlineSuggest.trigger",
+    "when": "config.github.copilot.inlineSuggest.enable && editorTextFocus && !editorHasSelection && !inlineSuggestionsVisible"
+  }
+]

@@ -1,0 +1,119 @@
+{
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+    "editor.formatOnSave": true
+  },
+  "[yaml, .clang-tidy]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.formatOnSave": true
+  },
+  "files.associations": {
+    ".clangd": "yaml",
+    ".clang-tidy": "yaml",
+    ".clang-format": "yaml"
+  },
+  "[nix]": {
+    "editor.defaultFormatter": "B4dM4n.nixpkgs-fmt",
+    "editor.formatOnSave": true
+  },
+  "[cpp]": {
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+    "editor.formatOnSave": true
+  },
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+    "editor.formatOnSave": true
+  },
+  "rust-analyzer.rustfmt.overrideCommand": [
+    "rustup",
+    "run",
+    "nightly",
+    "rustfmt",
+    "--edition=2024",
+    "--"
+  ],
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml",
+    "editor.formatOnSave": true
+  },
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true
+  },
+  "[html]": {
+    "editor.formatOnSave": false
+  },
+  "editor.cursorBlinking": "smooth",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 120,
+  "rust-analyzer.server.path": "rust-analyzer",
+  "search.exclude": {
+    "**/.direnv": true,
+    "**/.git": true,
+    "**/node_modules": true,
+    "*.lock": true,
+    "dist": true,
+    "tmp": true
+  },
+  "vim.insertModeKeyBindings": [
+    {
+      "after": ["<Esc>"],
+      "before": ["j", "k"]
+    }
+  ],
+  "vim.leader": "<space>",
+  "vim.normalModeKeyBindings": [
+    {
+      "before": ["leader", "w"],
+      "commands": ["workbench.action.files.save"]
+    },
+    {
+      "before": ["leader", "e"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
+    {
+      "before": ["leader", "f"],
+      "commands": [
+        {
+          "command": "workbench.action.toggleFullScreen"
+        }
+      ]
+    },
+    {
+      "before": ["leader", "m"],
+      "commands": [
+        "workbench.action.togglertatusbarVisibility",
+        "workbench.action.toggleActivityBarVisibility"
+      ]
+    }
+  ],
+  "vim.visualModeKeyBindings": [
+    {
+      "before": [">"],
+      "commands": ["editor.action.indentLines"]
+    },
+    {
+      "before": ["<"],
+      "commands": ["editor.action.outdentLines"]
+    }
+  ],
+  "window.autoDetectColorScheme": false,
+  "window.nativeTabs": true,
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.colorCustomizations": {
+    "terminal.background": "#00000000"
+  },
+  "window.titleBarStyle": "custom",
+  "workbench.startupEditor": "none",
+  "workbench.preferredLightColorTheme": "Default Dark+",
+  "vscode_vibrancy.opacity": -1,
+  "vscode_vibrancy.theme": "GitHub Dark Default",
+  "vscode_vibrancy.preferedDarkTheme": "GitHub Dark Default",
+  "terminal.integrated.gpuAcceleration": "off",
+  "window.systemColorTheme": "dark",
+  "github.copilot.nextEditSuggestions.fixes": false,
+  "mesonbuild.downloadLanguageServer": true,
+  "redhat.telemetry.enabled": false
+}
