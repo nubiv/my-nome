@@ -101,7 +101,7 @@
   ],
   "window.autoDetectColorScheme": false,
   "window.nativeTabs": true,
-  "workbench.colorTheme": "Default Dark+",
+  "workbench.colorTheme": "GitHub Dark Default",
   "workbench.colorCustomizations": {
     "terminal.background": "#00000000"
   },
