@@ -29,6 +29,12 @@
       stateVersion = "25.05";
       system = "aarch64-darwin";
       username = "nubiv";
+      # username = builtins.getEnv "HOSTNAME";
+      # username =
+      #   let
+      #     host = builtins.getEnv "HOSTNAME";
+      #   in
+      #   if host != "" then host else "nubiv";
     in
     {
       devShells = forEachSupportedSystem ({ pkgs, system }: {
@@ -115,7 +121,7 @@
           inputs.self.darwinModules.determinate-nix
           inputs.home-manager.darwinModules.home-manager
           inputs.self.darwinModules.home-manager
-	  inputs.self.darwinModules.system-config
+          inputs.self.darwinModules.system-config
         ];
       };
 

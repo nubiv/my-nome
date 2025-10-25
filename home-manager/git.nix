@@ -16,8 +16,17 @@
     init.defaultBranch = "main";
     protocol.keybase.allow = "always";
     pull.rebase = "false";
-    user = { signingkey = "125C140B6EE4E618"; }; # n 
-    # user = { signingkey = "D2EC05A229F95E48"; }; # h
+    user = {
+      signingkey =
+        let
+          hostname = pkgs.constants.username;
+          keys = {
+            nubiv = "125C140B6EE4E618";
+            horus = "D2EC05A229F95E48";
+          };
+        in
+        builtins.getAttr hostname keys;
+    };
   };
   userName = pkgs.constants.username;
   userEmail = "h.horace0921@gmail.com";
