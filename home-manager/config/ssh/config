@@ -1,5 +1,1 @@
 Include ~/.ssh/config.d/*.conf
-
-Host *.github.com
-    AddKeysToAgent yes
-    IdentityFile ~/.ssh/nubiv

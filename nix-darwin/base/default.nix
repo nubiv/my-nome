@@ -47,7 +47,7 @@
   security.pam.services.sudo_local.touchIdAuth = true;
 
   system.stateVersion = 5;
-  system.primaryUser = "nubiv";
+  system.primaryUser = pkgs.constants.username;
 
   users.users.${pkgs.constants.username} = {
     name = pkgs.constants.username;

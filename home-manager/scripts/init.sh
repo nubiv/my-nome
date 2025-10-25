@@ -6,7 +6,6 @@ if [ -e ~/.env.sh ]; then
 fi
 
 eval "$(ssh-agent -s)"
-# ssh-add ~/.ssh/nubiv
 
 # Shell completion for various tools
 eval "$(determinate-nixd completion zsh)"
@@ -15,9 +14,6 @@ eval "$(determinate-nixd completion zsh)"
 export ENVRC_USE_FLAKE="1"
 
 export CARGO_NET_GIT_FETCH_WITH_CLI="true"
-
-export http_proxy='http://127.0.0.1:7891'
-export https_proxy='http://127.0.0.1:7891'
 
 # Vi-style keybindings in Zsh
 bindkey -v

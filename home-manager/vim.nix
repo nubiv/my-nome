@@ -3,7 +3,7 @@
 {
   enable = true;
 
-  extraConfig = (builtins.readFile ./config/.vimrc);
+  extraConfig = (builtins.readFile ./config/vim/.vimrc);
 
   # Vim plugins
   plugins = with pkgs.vimPlugins; [
