@@ -28,7 +28,7 @@
 
       stateVersion = "25.05";
       system = "aarch64-darwin";
-      username = "horus";
+      username = "nubiv";
     in
     {
       devShells = forEachSupportedSystem ({ pkgs, system }: {
