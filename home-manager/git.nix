@@ -16,8 +16,12 @@
     init.defaultBranch = "main";
     protocol.keybase.allow = "always";
     pull.rebase = "false";
-    user = { signingkey = "125C140B6EE4E618"; };
+    user = { signingkey = "125C140B6EE4E618"; }; # n 
+    # user = { signingkey = "D2EC05A229F95E48"; }; # h
   };
+  userName = pkgs.constants.username;
+  userEmail = "h.horace0921@gmail.com";
+  package = pkgs.gitAndTools.gitFull;
   ignores = [
     ".cache/"
     ".DS_Store"
@@ -30,7 +34,4 @@
     "npm-debug.log"
   ];
   lfs = { enable = true; };
-  package = pkgs.gitAndTools.gitFull;
-  userEmail = "h.horace0921@gmail.com";
-  userName = "nubiv";
 }
