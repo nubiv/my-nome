@@ -4,10 +4,10 @@ rec {
     description = "Nix template";
   };
 
-  vs = vscode;
+  # vs = vscode;
 
-  vscode = {
-    path = ./vscode;
-    description = "VS Code settings template";
-  };
+  # vscode = {
+  #  path = ./vscode;
+  #  description = "VS Code settings template";
+  # };
 }
