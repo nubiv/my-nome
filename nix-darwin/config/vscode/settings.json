@@ -110,9 +110,10 @@
   "vscode_vibrancy.opacity": -1,
   "vscode_vibrancy.theme": "GitHub Dark Default",
   "vscode_vibrancy.preferedDarkTheme": "GitHub Dark Default",
-  "terminal.integrated.gpuAcceleration": "off",
-  "window.systemColorTheme": "dark",
   "github.copilot.nextEditSuggestions.fixes": false,
   "mesonbuild.downloadLanguageServer": true,
-  "redhat.telemetry.enabled": false
+  "redhat.telemetry.enabled": false,
+  "workbench.colorTheme": "GitHub Dark Default",
+  "terminal.integrated.gpuAcceleration": "off",
+  "window.systemColorTheme": "dark"
 }
