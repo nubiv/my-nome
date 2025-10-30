@@ -108,12 +108,10 @@
   "workbench.startupEditor": "none",
   "workbench.preferredLightColorTheme": "Default Dark+",
   "vscode_vibrancy.opacity": -1,
-  "vscode_vibrancy.theme": "GitHub Dark Default",
-  "vscode_vibrancy.preferedDarkTheme": "GitHub Dark Default",
   "github.copilot.nextEditSuggestions.fixes": false,
   "mesonbuild.downloadLanguageServer": true,
   "redhat.telemetry.enabled": false,
-  "workbench.colorTheme": "GitHub Dark Default",
+  "workbench.colorTheme": "Default Dark+",
   "terminal.integrated.gpuAcceleration": "off",
   "window.systemColorTheme": "dark"
 }
