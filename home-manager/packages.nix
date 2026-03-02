@@ -7,6 +7,7 @@ let
     unzip
     wget
     zstd
+    tmux
   ];
 
   bin = import ./bin.nix {
@@ -16,7 +17,7 @@ let
   buildTools = with pkgs; [
     cmake
     meson
-    ninja 
+    ninja
     #llvm
   ];
 
@@ -59,8 +60,8 @@ let
     nixpkgs-fmt
   ];
 
-  pythonTools = with pkgs; [ 
-    rye 
+  pythonTools = with pkgs; [
+    rye
     uv
     maturin
   ];
