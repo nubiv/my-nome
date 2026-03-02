@@ -13,6 +13,7 @@ hop = [
   "--to",
   "closest_pushable(@)",
 ]
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@"]
 l = ["log"]
 la = ["log", "-r", "all"]
 n = ["new"]
