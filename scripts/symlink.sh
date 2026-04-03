@@ -8,7 +8,7 @@ fi
 link_with_backup() {
     local SOURCE="$1"
     local TARGET="$2"
-    local BAK="${TARGET}_bak"
+    local BAK="${TARGET}.bak"
 
     if [ -e "$TARGET" ] || [ -L "$TARGET" ]; then
         if [ -e "$BAK" ] || [ -L "$BAK" ]; then
