@@ -16,11 +16,21 @@ if [ ! -d "$TARGET" ]; then
     exit 1
 fi
 
-cp -r "$TEMPLATE_DIR"/. "$TARGET/" || { echo "Error: failed to copy files."; exit 1; }
-
-echo "C++ repo initialized in $TARGET:"
-for file in "$TEMPLATE_DIR"/*  "$TEMPLATE_DIR"/.*; do
+for file in "$TEMPLATE_DIR"/* "$TEMPLATE_DIR"/.*; do
     name="$(basename "$file")"
     [ "$name" = "." ] || [ "$name" = ".." ] && continue
-    echo "  $name"
+    dest="$TARGET/$name"
+    if [ -e "$dest" ] || [ -L "$dest" ]; then
+        bak="${dest}.bak"
+        if [ -e "$bak" ] || [ -L "$bak" ]; then
+            echo "Error: backup $bak already exists, skipping $name"
+            continue
+        fi
+        mv "$dest" "$bak" || { echo "Error: failed to backup $dest"; exit 1; }
+        echo "Backed up $dest -> $bak"
+    fi
+    cp -r "$file" "$dest" || { echo "Error: failed to copy $name"; exit 1; }
+    echo "Copied $name"
 done
+
+echo "C++ repo initialized in $TARGET."
