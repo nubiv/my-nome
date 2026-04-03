@@ -8,6 +8,8 @@ if [ ! -d "$HOME/.config/karabiner" ]; then
     exit 1
 fi
 
-"$SCRIPT_DIR/symlink.sh" \
-    "$REPO_DIR/nix-darwin/config/karabiner/karabiner.json" \
-    "$HOME/.config/karabiner/karabiner.json"
+LINKS=(
+    "$REPO_DIR/nix-darwin/config/karabiner/karabiner.json"  "$HOME/.config/karabiner/karabiner.json"
+)
+
+"$SCRIPT_DIR/symlink.sh" "${LINKS[@]}"

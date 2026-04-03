@@ -8,6 +8,8 @@ if [ ! -d "$HOME/.cargo" ]; then
     exit 1
 fi
 
-"$SCRIPT_DIR/symlink.sh" \
-    "$REPO_DIR/home-manager/config/rust/cargo/config.toml" \
-    "$HOME/.cargo/config.toml"
+LINKS=(
+    "$REPO_DIR/home-manager/config/rust/cargo/config.toml"  "$HOME/.cargo/config.toml"
+)
+
+"$SCRIPT_DIR/symlink.sh" "${LINKS[@]}"

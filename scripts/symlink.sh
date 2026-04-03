@@ -19,8 +19,8 @@ link_with_backup() {
         echo "Renamed $TARGET -> $BAK"
     fi
 
-    ln -s "$SOURCE" "$TARGET" || { echo "Error: failed to link $SOURCE -> $TARGET"; return 1; }
-    echo "Linked $SOURCE -> $TARGET"
+    ln -s "$SOURCE" "$TARGET" || { echo "Error: failed to link $TARGET -> $SOURCE"; return 1; }
+    echo "Linked $TARGET -> $SOURCE"
 }
 
 while [ $# -gt 0 ]; do
