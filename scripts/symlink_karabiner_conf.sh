@@ -12,4 +12,9 @@ LINKS=(
     "$REPO_DIR/nix-darwin/config/karabiner/karabiner.json"  "$HOME/.config/karabiner/karabiner.json"
 )
 
-"$SCRIPT_DIR/symlink.sh" "${LINKS[@]}"
+"$SCRIPT_DIR/symlink.sh" "${LINKS[@]}" || exit 1
+
+echo "Karabiner config linked:"
+for ((i=0; i<${#LINKS[@]}; i+=2)); do
+    echo "  ${LINKS[i+1]} -> ${LINKS[i]}"
+done

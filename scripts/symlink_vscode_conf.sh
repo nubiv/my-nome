@@ -15,4 +15,9 @@ LINKS=(
     "$REPO_DIR/nix-darwin/config/vscode/keybindings.json"  "$VSCODE_USER_DIR/keybindings.json"
 )
 
-"$SCRIPT_DIR/symlink.sh" "${LINKS[@]}"
+"$SCRIPT_DIR/symlink.sh" "${LINKS[@]}" || exit 1
+
+echo "VS Code config linked:"
+for ((i=0; i<${#LINKS[@]}; i+=2)); do
+    echo "  ${LINKS[i+1]} -> ${LINKS[i]}"
+done

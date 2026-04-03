@@ -18,4 +18,9 @@ LINKS=(
     "$REPO_DIR/nix-darwin/config/claude/skills"            "$HOME/.claude/skills"
 )
 
-"$SCRIPT_DIR/symlink.sh" "${LINKS[@]}"
+"$SCRIPT_DIR/symlink.sh" "${LINKS[@]}" || exit 1
+
+echo "Claude config linked:"
+for ((i=0; i<${#LINKS[@]}; i+=2)); do
+    echo "  ${LINKS[i+1]} -> ${LINKS[i]}"
+done
