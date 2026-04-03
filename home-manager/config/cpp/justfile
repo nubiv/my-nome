@@ -1,0 +1,14 @@
+default:
+    @just --list
+
+test:
+    @echo 'Testing!'
+
+build:
+    meson setup ./build
+
+compile:
+    meson compile -C ./build
+
+reconfig:
+    meson setup --reconfigure ./build

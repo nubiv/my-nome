@@ -1,0 +1,37 @@
+# Rust build artifacts
+/target
+**/*.rs.bk
+*.pdb
+
+# IDE and editor files
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.vim
+.editorconfig
+
+# Environment and local files
+.env
+.env.local
+config.local.yaml
+config.*.local.yaml
+config.local.toml
+config.*.local.toml
+
+# Cargo lock file (optional for libraries)
+Cargo.lock
+
+# Test outputs
+/tmp
+/test-output
+
+# Log files
+/logs
+
+# Flamegraph and profiling
+*.flamegraph
+perf.data
+perf.data.old
