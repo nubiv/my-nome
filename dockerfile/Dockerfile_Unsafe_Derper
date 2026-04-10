@@ -29,6 +29,10 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/re
 
 RUN apk add openssl && mkdir /ssl
 
-RUN openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout /ssl/derp.relay.nubiv.org.key -out /ssl/derp.relay.nubiv.org.crt -subj "/CN=derp.relay.nubiv.org" -addext "subjectAltName=DNS:derp.relay.nubiv.org"
+RUN openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout /ssl/derper.example.com.key -out /ssl/derper.example.com.crt -subj "/CN=derper.example.com" -addext "subjectAltName=DNS:derper.example.com"
 
-CMD ["./derper", "-hostname", "derp.relay.nubiv.org", "-a", ":23458", "-certmode", "manual", "-certdir", "/ssl"]
+CMD ["./derper", "-hostname", "derper.example.com", "-a", ":12345", "-certmode", "manual", "-certdir", "/ssl"]
+
+# Spwaning the container
+docker run -d --name unsafe_derper -p 12345:12345 -p 3478:3478/udp --restart=always unsafe_derper:latest
+
