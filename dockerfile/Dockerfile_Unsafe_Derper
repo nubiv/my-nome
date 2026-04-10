@@ -1,0 +1,34 @@
+FROM golang:alpine AS builder
+
+RUN go env -w GOPROXY=https://goproxy.cn,direct
+
+RUN go install tailscale.com/cmd/derper@latest
+
+# The location of getCertificate function in cert.go may change in the future, update the line numbers accordingly if the build fails.
+RUN find /go/pkg/mod/tailscale.com@*/cmd/derper/cert.go -type f -exec sed -i '156,158d' {} +
+
+RUN derper_dir=$(find /go/pkg/mod/tailscale.com@*/cmd/derper -type d) && \
+cd $derper_dir && \
+go build -o /etc/derp/derper
+
+FROM alpine:latest
+
+WORKDIR /apps
+
+COPY --from=builder /etc/derp/derper .
+
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+&& echo 'Asia/Shanghai' > /etc/timezone
+
+ENV LANG=C.UTF-8
+
+# Necessary for amd64 architecture, arm64 architecture does not require this step.
+RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
+
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
+
+RUN apk add openssl && mkdir /ssl
+
+RUN openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout /ssl/derp.relay.nubiv.org.key -out /ssl/derp.relay.nubiv.org.crt -subj "/CN=derp.relay.nubiv.org" -addext "subjectAltName=DNS:derp.relay.nubiv.org"
+
+CMD ["./derper", "-hostname", "derp.relay.nubiv.org", "-a", ":23458", "-certmode", "manual", "-certdir", "/ssl"]
