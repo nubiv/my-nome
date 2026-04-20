@@ -22,6 +22,9 @@
             source = ./config/ssh/config;
             # mode = "0600";
           };
+          ".vim/colors/mountaineer-grey.vim" = {
+            source = ./config/vim/.vim/colors/mountaineer-grey.vim;
+          };
         };
         inherit stateVersion username;
       };

@@ -11,7 +11,8 @@
     # ctrlp
     # editorconfig-vim
     # gruvbox
-    # nerdtree
+    nerdtree
+    vim-commentary
     # tabular
     # vim-cpp-enhanced-highlight
     # vim-nix
