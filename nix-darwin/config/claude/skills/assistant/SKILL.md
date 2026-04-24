@@ -13,7 +13,7 @@ Scan the user's MY_DESK workspace, compile open tasks, and present a prioritized
 
 - **Today's date**: use the current date
 - **Daily note**: read `ndian/MY_DESK/Daily/YYYY-MM-DD.md` (today's date)
-- **Recent daily notes**: also check the previous 2 days for unclosed items
+- **Recent daily notes**: walk back up to **14 calendar days**. For each date, attempt to read `Daily/YYYY-MM-DD.md` — skip missing dates silently (weekends, gaps, days without notes). Collect unchecked tasks from every note that exists in the window.
 - **Project notes**: read all `.md` files under `ndian/MY_DESK/Projects/` (recurse into subdirectories)
 
 If a file does not exist, skip it silently.
@@ -67,7 +67,21 @@ Format as a single prioritised list grouped by tier:
 - If no items exist for a tier, omit that section
 - After the list, add a short **Suggested focus** section: pick the top 1-3 items to work on and briefly say why
 
-### 5. Offer next steps
+### 5. Carry forward
+
+When creating today's daily note (or if it already exists but has no carried-over section):
+
+1. Take all unchecked tasks from daily notes **older than yesterday** that were found in step 1
+2. Add them to today's note under a `## Carried Over` section, each annotated with its original date:
+   ```
+   ## Carried Over
+   - [ ] Task description (from [[Daily/2026-04-18]])
+   ```
+3. Do **not** modify or remove the tasks from their original notes — they stay as historical record
+
+This ensures no task silently vanishes due to gaps or age.
+
+### 6. Offer next steps
 
 After presenting, ask:
 - Want me to update any of these items?
