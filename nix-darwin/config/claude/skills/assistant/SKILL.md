@@ -14,7 +14,9 @@ Scan the user's MY_DESK workspace, compile open tasks, and present a prioritized
 - **Today's date**: use the current date
 - **Daily note**: read `ndian/MY_DESK/Daily/YYYY-MM-DD.md` (today's date)
 - **Recent daily notes**: walk back up to **14 calendar days**. For each date, attempt to read `Daily/YYYY-MM-DD.md` — skip missing dates silently (weekends, gaps, days without notes). Collect unchecked tasks from every note that exists in the window.
-- **Project notes**: read all `.md` files under `ndian/MY_DESK/Projects/` (recurse into subdirectories)
+- **Project notes** (two-pass):
+  1. Read every **main project note** — the `.md` file whose name matches its parent folder (e.g. `Projects/apricot/apricot.md`, `Projects/jw_derive/jw_derive.md`). These provide project context, status, and scope.
+  2. For all other `.md` files under `Projects/`, grep for task patterns (`- \[ \]`, `TODO`, `FIXME`, `ACTION`, `NEXT`, `due:`, `deadline:`). Only read files that have matches.
 
 If a file does not exist, skip it silently.
 
