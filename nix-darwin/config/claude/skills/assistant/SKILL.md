@@ -24,8 +24,10 @@ Parse the subcommand, then execute the matching section below. If no subcommand 
 
 ## Vault paths
 
+Read `ndian/MY_DESK/SCHEMA.md` for full conventions. Key paths:
+
 - Daily notes: `ndian/MY_DESK/Daily/YYYY-MM-DD.md`
-- Projects: `ndian/MY_DESK/Projects/` — main project note = `.md` file matching its parent folder name
+- Projects: `ndian/MY_DESK/Projects/<name>/<name>.md` (main note matches folder name)
 - MY_WIKI: `ndian/MY_WIKI/wiki/` (read-only for this skill)
 
 ---
@@ -120,8 +122,8 @@ Do not create or modify any files.
 End-of-day review. Read-only.
 
 1. Read today's daily note.
-2. Read any notes modified today (check `git diff --name-only` for today's changes).
-3. Read the morning plan if `today` was run earlier (check today's note for carried-over section or task list).
+2. Read any notes modified today (check `jj diff --summary` for today's changes).
+3. Read the morning plan if `open` was run earlier (check today's note for carried-over section or task list).
 
 Present:
 
