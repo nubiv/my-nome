@@ -1,6 +1,6 @@
 ---
 name: assistant
-description: "Personal assistant and thinking partner. Subcommands: open, context, close, ghost, challenge, emerge, drift, trace, connect, ideas. Use when the user invokes /assistant with a subcommand."
+description: "Personal assistant and thinking partner. Subcommands: open, context, close, ghost, challenge, emerge, drift, trace, connect, ideas, handoff, checkin. Use when the user invokes /assistant with a subcommand."
 ---
 
 # Personal Assistant
@@ -19,6 +19,8 @@ Route based on the first word of `$ARGUMENTS`:
 | `trace <topic>` | Track how an idea evolved over time |
 | `connect <A> and <B>` | Find hidden bridges between two domains |
 | `ideas` | Deep vault scan to generate actionable ideas |
+| `handoff <project>` | Write implementation-ready next items to the project's repo CLAUDE.md |
+| `checkin` | Write a session summary to `.claude/checkins/` in the current repo |
 
 Parse the subcommand, then execute the matching section below. If no subcommand is provided, show the routing table and ask the user to pick one.
 
@@ -43,6 +45,7 @@ Morning planning. Prioritized todo list with carry-forward.
 - **Project notes** (two-pass):
   1. Read every main project note (`.md` matching parent folder name).
   2. For other `.md` files under `Projects/`, grep for task patterns (`- [ ]`, `TODO`, `FIXME`, `ACTION`, `NEXT`, `due:`, `deadline:`). Only read files with matches.
+- **Pending checkins**: Read `.claude/local.md` — for each entry under `repos:`, check `{mapped_path}/.claude/checkins/` for any unread checkin files (i.e., files not already referenced in any daily note). Read them and extract carry-forward items.
 
 ### 2. Extract tasks
 
@@ -79,6 +82,8 @@ Ignore completed checkboxes (`- [x]`).
 ```
 
 Omit empty tiers. After the list, add **Suggested focus**: pick 1–3 items and say why.
+
+If any pending checkin files were found, append a **From repo sessions** section listing each checkin's carry-forward items with the project and date. Do not merge these into the priority tiers — keep them separate for the user to decide what to promote.
 
 ### 5. Carry forward
 
@@ -124,6 +129,7 @@ End-of-day review. Read-only.
 1. Read today's daily note.
 2. Read any notes modified today (check `jj diff --summary` for today's changes).
 3. Read the morning plan if `open` was run earlier (check today's note for carried-over section or task list).
+4. **Checkins**: Read `.claude/local.md` — for each entry under `repos:`, check `{mapped_path}/.claude/checkins/` for any checkin files dated today. Read them.
 
 Present:
 
@@ -132,6 +138,8 @@ Present:
 - **Open loops**: tasks or questions carrying into tomorrow
 - **Observations**: recurring theme, contradiction, or new idea that appeared today
 - **Tomorrow seed**: 1–2 specific things to start with tomorrow
+
+If today's checkin files exist, append a **Repo session summaries** section with each checkin's done/decisions/carry-forward content.
 
 Do not create or modify any files.
 
@@ -297,3 +305,101 @@ Deep idea generation. Read-only.
 For each: one sentence, why it fits specifically (cite notes), and a concrete first step.
 Aim for 10–15 ideas. Prioritize novel over obvious.
 Do not create or modify any files.
+
+---
+
+## handoff
+
+Bridge vault project context into a repo's CLAUDE.md for a focused implementation session.
+
+The project name is everything after `handoff` in `$ARGUMENTS`.
+
+### 1. Resolve repo path
+
+1. Read `.claude/local.md` in the vault root — look up `<project>` under `repos:`.
+2. Full path = the mapped value. If the project isn't listed, tell the user to add it to `.claude/local.md` and stop.
+
+### 2. Gather implementation-ready items
+
+Read the project's main note and today's daily note. Extract only items that are:
+- Concrete and immediately actionable (a specific thing to run, write, or fix)
+- Not planning, scoping, or decision tasks — those stay in the vault
+
+Sources to check:
+- `### Next` section of the project note
+- Unchecked `- [ ]` tasks in today's daily note tagged to this project
+- Any `TODO` / `FIXME` in supporting project notes (e.g. architecture, phases)
+
+### 3. Write CLAUDE.md
+
+Write (or update) `{repo_path}/CLAUDE.md`:
+
+- If no CLAUDE.md exists: create it with a `## Next` section
+- If one exists: read it first, then replace or append the `## Next` section only — preserve everything else
+
+Format:
+```markdown
+# <Project name> — Claude Code
+
+## Next
+
+- <item 1>
+- <item 2>
+...
+```
+
+Keep items terse and specific. One action per line. No planning prose.
+
+### 4. Confirm
+
+Report what was written and the full repo path used.
+
+---
+
+## checkin
+
+Write a session summary for the current repo. Run this at the end of a coding session. No arguments needed.
+
+### 1. Determine paths
+
+1. Project name = current working directory name.
+2. Checkin file path: `.claude/checkins/<project>-YYYY-MM-DD.md` (today's date, relative to repo root).
+
+### 2. Gather session content
+
+Collect from the current session context:
+- **Done**: completed tasks, fixes, implementations — specific and concrete
+- **Decisions**: architectural or design choices made, with brief rationale
+- **Carry-forward**: items started but not finished, or next concrete steps surfaced
+- **Questions**: unresolved questions that need vault-side planning or user decision
+
+Only include items with substance. Skip boilerplate, tooling noise, and process steps.
+
+### 3. Write checkin file
+
+Write to `{repo_root}/{repo}/.claude/checkins/<project>-YYYY-MM-DD.md`:
+
+```markdown
+---
+project: <project>
+date: YYYY-MM-DD
+---
+
+## Done
+- <item>
+
+## Decisions
+- <decision> — <rationale>
+
+## Carry-forward
+- <item>
+
+## Questions
+- <question>
+```
+
+Omit empty sections. Keep items terse — one line each.
+
+### 4. Confirm
+
+Report the file path written and a count of items in each section.
