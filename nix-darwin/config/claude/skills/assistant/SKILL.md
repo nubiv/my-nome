@@ -19,7 +19,7 @@ Route based on the first word of `$ARGUMENTS`:
 | `trace <topic>` | Track how an idea evolved over time |
 | `connect <A> and <B>` | Find hidden bridges between two domains |
 | `ideas` | Deep vault scan to generate actionable ideas |
-| `handoff <project>` | Write implementation-ready next items to the project's repo CLAUDE.md |
+| `handoff <project>` | Write implementation-ready next items to the project's `.claude/handoffs/` dir |
 | `checkin` | Write a session summary to `.claude/checkins/` in the current repo |
 
 Parse the subcommand, then execute the matching section below. If no subcommand is provided, show the routing table and ask the user to pick one.
@@ -310,7 +310,7 @@ Do not create or modify any files.
 
 ## handoff
 
-Bridge vault project context into a repo's CLAUDE.md for a focused implementation session.
+Bridge vault project context into a date-stamped handoff file in the repo's `.claude/handoffs/` directory.
 
 The project name is everything after `handoff` in `$ARGUMENTS`.
 
@@ -321,25 +321,25 @@ The project name is everything after `handoff` in `$ARGUMENTS`.
 
 ### 2. Gather implementation-ready items
 
-Read the project's main note and today's daily note. Extract only items that are:
+Read the project's main note and today's daily note. Also check `{repo_path}/.claude/checkins/` — read the most recent checkin file (by date in filename) and pull any **Carry-forward** items not already in the vault note. Extract only items that are:
 - Concrete and immediately actionable (a specific thing to run, write, or fix)
 - Not planning, scoping, or decision tasks — those stay in the vault
 
-Sources to check:
+Sources to check (in priority order):
 - `### Next` section of the project note
+- **Carry-forward** section of the most recent checkin in `{repo_path}/.claude/checkins/`
 - Unchecked `- [ ]` tasks in today's daily note tagged to this project
 - Any `TODO` / `FIXME` in supporting project notes (e.g. architecture, phases)
 
-### 3. Write CLAUDE.md
+### 3. Write handoff file
 
-Write (or update) `{repo_path}/CLAUDE.md`:
+Write to `{repo_path}/.claude/handoffs/<project>-YYYY-MM-DD.md` (today's date):
 
-- If no CLAUDE.md exists: create it with a `## Next` section
-- If one exists: read it first, then replace or append the `## Next` section only — preserve everything else
-
-Format:
 ```markdown
-# <Project name> — Claude Code
+---
+project: <project>
+date: YYYY-MM-DD
+---
 
 ## Next
 
@@ -352,7 +352,7 @@ Keep items terse and specific. One action per line. No planning prose.
 
 ### 4. Confirm
 
-Report what was written and the full repo path used.
+Report the file path written and the full repo path used.
 
 ---
 
@@ -367,10 +367,12 @@ Write a session summary for the current repo. Run this at the end of a coding se
 
 ### 2. Gather session content
 
-Collect from the current session context:
-- **Done**: completed tasks, fixes, implementations — specific and concrete
+Check `{repo_root}/.claude/handoffs/` for the most recent handoff file (by date in filename) and read it. Use its **Next** items as the baseline of what was planned going into this session — items completed from it belong in **Done**, items not started belong in **Carry-forward** (unless obsolete).
+
+Then collect from the current session context:
+- **Done**: completed tasks, fixes, implementations — specific and concrete. Cross-reference against the handoff's Next items: prefix with `(handoff)` if it was planned there.
 - **Decisions**: architectural or design choices made, with brief rationale
-- **Carry-forward**: items started but not finished, or next concrete steps surfaced
+- **Carry-forward**: items started but not finished, or next concrete steps surfaced. Include unstarted handoff items that are still relevant.
 - **Questions**: unresolved questions that need vault-side planning or user decision
 
 Only include items with substance. Skip boilerplate, tooling noise, and process steps.
