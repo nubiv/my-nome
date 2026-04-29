@@ -333,7 +333,9 @@ Sources to check (in priority order):
 
 ### 3. Write handoff file
 
-Write to `{repo_path}/.claude/handoffs/<project>-YYYY-MM-DD.md` (today's date):
+Target path: `{repo_path}/.claude/handoffs/<project>-YYYY-MM-DD.md` (today's date).
+
+If that file already exists, increment a numeric suffix until the path is free: `<project>-YYYY-MM-DD-2.md`, `<project>-YYYY-MM-DD-3.md`, etc. Never overwrite an existing file.
 
 ```markdown
 ---
@@ -379,7 +381,9 @@ Only include items with substance. Skip boilerplate, tooling noise, and process 
 
 ### 3. Write checkin file
 
-Write to `{repo_root}/{repo}/.claude/checkins/<project>-YYYY-MM-DD.md`:
+Target path: `{repo_root}/.claude/checkins/<project>-YYYY-MM-DD.md` (today's date).
+
+If that file already exists, increment a numeric suffix until the path is free: `<project>-YYYY-MM-DD-2.md`, `<project>-YYYY-MM-DD-3.md`, etc. Never overwrite an existing file.
 
 ```markdown
 ---
